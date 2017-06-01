@@ -15,7 +15,7 @@ public class ParserTest {
     }
 
     @Test
-    public void testoutputSplitter(){
+    public void testOutputSplitter(){
         String givenString = "naMe:Milk;price:3.23;type:Food;expiration:1/25/2016##\n" +
                 "naME:BreaD;price:1.23;type:Food;expiration:1/02/2016##\n" +
                 "NAMe:BrEAD;price:1.23;type:Food;expiration:2/25/2016##\n" +

@@ -22,10 +22,11 @@ public class Parser {
 //        return result;
 //    }
 
-    Pattern pattern = Pattern.compile("##");
+
 
 
     public String[] outputSplitter(String rawData) {
+        Pattern pattern = Pattern.compile("##");
         dataOutputArr = pattern.split(rawData);
         return dataOutputArr;
     }
@@ -70,11 +71,11 @@ public class Parser {
 
     public String expirationParser(String stringToParse) throws NullPointerException {
         String itemExpiration= "";
-        Pattern ExpirationRegex = Pattern.compile(this.fullRegexString);
+        Pattern ExpirationRegex = Pattern.compile(fullRegexString);
         Matcher ExpirationMatcher = ExpirationRegex.matcher(stringToParse);
         try {
             if (ExpirationMatcher.find()) {
-                itemExpiration = ExpirationMatcher.group(12);
+                itemExpiration = ExpirationMatcher.group(11);
                 return itemExpiration;
             } else {
                 throw new NullPointerException();

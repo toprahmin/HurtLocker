@@ -1,33 +1,49 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Created by rahmirford on 5/31/17.
  */
 public class Item {
-    private String itemname;
-    private String itemprice;
-    private String itemtype;
-    private String itemexpiration;
+    private String itemName;
+    private String itemPrice;
+    private String itemType;
+    private String itemExpiration;
 
+    public Item(){}
     public Item(String name,String price, String type, String expiration){
-        this.itemname = name;
-        this.itemprice = price;
-        this.itemtype = type;
-        this.itemexpiration = expiration;
+        this.itemName = milkNameReplacer(name);
+        this.itemPrice = price;
+        this.itemType = type;
+        this.itemExpiration = expiration;
     }
 
+    // Replace scrambled item name with correct item name
+
+    public String milkNameReplacer(String name){
+        Pattern pattern = Pattern.compile("([mM]\\w{3})");
+        Matcher match = pattern.matcher(name);
+        itemName = match.replaceFirst("Milk");
+        return itemName;
+
+    }
+
+
+
     public String getName() {
-        return itemname;
+        return itemName;
     }
 
     public String getPrice() {
-        return itemprice;
+        return itemPrice;
     }
 
     public String getType() {
-        return itemtype;
+        return itemType;
     }
 
     public String getExpiration() {
-        return itemexpiration;
+        return itemExpiration;
     }
 }
 
