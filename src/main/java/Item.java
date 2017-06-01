@@ -2,32 +2,32 @@
  * Created by rahmirford on 5/31/17.
  */
 public class Item {
-    private String name;
-    private String price;
-    private String type;
-    private String expiration;
+    private String itemname;
+    private String itemprice;
+    private String itemtype;
+    private String itemexpiration;
 
     public Item(String name,String price, String type, String expiration){
-        this.name = name;
-        this.price = price;
-        this.type = type;
-        this.expiration = expiration;
+        this.itemname = name;
+        this.itemprice = price;
+        this.itemtype = type;
+        this.itemexpiration = expiration;
     }
 
     public String getName() {
-        return name;
+        return itemname;
     }
 
     public String getPrice() {
-        return price;
+        return itemprice;
     }
 
     public String getType() {
-        return type;
+        return itemtype;
     }
 
     public String getExpiration() {
-        return expiration;
+        return itemexpiration;
     }
 }
 

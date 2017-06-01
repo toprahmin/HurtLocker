@@ -10,9 +10,8 @@ public class Parser {
     private String[] dataOutputArr;
     private String result;
     private String fullRegexString = "(\\w{4}:)((\\w*)?)(;)(\\w{5}:)((\\d\\.\\d{2})?)(;)(type:Food)([;^%*!@])(expiration:)(\\d\\/\\d{2}\\/2016)";
-    private String name = "(^\\w{4}:)";
-    private String item = "";
-    private String price;
+    private String namePattern = "(^\\w{4}:)((\\w*)?)";
+    private String pricePattern = "(\\w{4}:)((\\w*)?)(;)(\\w{5}:)(\\d\\.\\d{2})";
     private int errorCounter;
 
 
@@ -35,9 +34,9 @@ public class Parser {
         return dataOutputArr;
     }
 
-    public String nameParser(String stringToParse, String regex) throws NullPointerException {
+    public String nameParser(String stringToParse) throws NullPointerException {
         String itemName= "";
-        Pattern nameRegex = Pattern.compile(regex);
+        Pattern nameRegex = Pattern.compile(this.namePattern);
         Matcher nameMatcher = nameRegex.matcher(stringToParse);
         try {
             if (nameMatcher.find()) {
@@ -50,19 +49,42 @@ public class Parser {
         return itemName;
     }
 
-    public String priceParser(String stringToParse, String regex) throws NullPointerException {
-        String itemPrice= "";
-        Pattern priceRegex = Pattern.compile(regex);
+    public String priceParser(String stringToParse) throws NullPointerException {
+        String itemPrice = "";
+        Pattern priceRegex = Pattern.compile(this.pricePattern);
         Matcher priceMatcher = priceRegex.matcher(stringToParse);
         try {
             if (priceMatcher.find()) {
-                itemPrice = priceMatcher.group(2);
+                itemPrice = priceMatcher.group(6);
                 return itemPrice;
+            } else {
+                throw new NullPointerException();
             }
         } catch (NullPointerException npe) {
             errorCounter++;
         }
         return itemPrice;
+    }
+
+    public String expirationParser(String stringToParse) throws NullPointerException {
+        String itemExpiration= "";
+        Pattern ExpirationRegex = Pattern.compile(this.fullRegexString);
+        Matcher ExpirationMatcher = ExpirationRegex.matcher(stringToParse);
+        try {
+            if (ExpirationMatcher.find()) {
+                itemExpiration = ExpirationMatcher.group(12);
+                return itemExpiration;
+            }
+        } catch (NullPointerException npe) {
+            this.errorCounter++;
+        }
+        return itemExpiration;
+    }
+
+
+    
+    public int getErrorCounter() {
+        return errorCounter;
     }
 }
 
