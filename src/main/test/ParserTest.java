@@ -72,4 +72,18 @@ public class ParserTest {
         Assert.assertEquals("the expected error counter should be 1", expectedErrorCounter,actualErrorCounter);
     }
 
+    @Test
+    public void testNullNameParser(){
+        //: Given
+        String givenString = "naMe:;price:3.23;type:Food;expiration:1/25/2016##";
+        int expectedErrorCounter = 1;
+        //: When
+        parser.nameParser(givenString);
+        int actualErrorCounter = parser.getErrorCounter();
+        //: Then
+        Assert.assertEquals("the expected string output should be 1", expectedErrorCounter,actualErrorCounter);
+    }
+
+
+
 }

@@ -9,8 +9,8 @@ import java.util.regex.Pattern;
 public class Parser {
     private String[] dataOutputArr;
     private String result;
-    private String fullRegexString = "(\\w{4}:)((\\w*)?)(;)(\\w{5}:)((\\d\\.\\d{2})?)(;)(type:Food)([;^%*!@])(expiration:)(\\d\\/\\d{2}\\/2016)";
-    private String namePattern = "(^\\w{4}:)((\\w*)?)";
+    private String fullRegexString = "(\\w{4}:)(\\w+)(;)(\\w{5}:)((\\d\\.\\d{2})?)(;)(type:Food)([;^%*!@])(expiration:)(\\d\\/\\d{2}\\/2016)";
+    private String namePattern = "(^\\w{4}:)(\\w+)";
     private String pricePattern = "(\\w{4}:)((\\w*)?)(;)(\\w{5}:)(\\d\\.\\d{2})";
     private int errorCounter;
 
@@ -42,9 +42,11 @@ public class Parser {
             if (nameMatcher.find()) {
                 itemName = nameMatcher.group(2);
                 return itemName;
+            } else {
+                throw new NullPointerException();
             }
-        } catch (NullPointerException npe) {
-            errorCounter++;
+        }catch (NullPointerException npe) {
+             errorCounter++;
         }
         return itemName;
     }
@@ -74,15 +76,17 @@ public class Parser {
             if (ExpirationMatcher.find()) {
                 itemExpiration = ExpirationMatcher.group(12);
                 return itemExpiration;
+            } else {
+                throw new NullPointerException();
             }
         } catch (NullPointerException npe) {
-            this.errorCounter++;
+            errorCounter++;
         }
         return itemExpiration;
     }
 
 
-    
+
     public int getErrorCounter() {
         return errorCounter;
     }
